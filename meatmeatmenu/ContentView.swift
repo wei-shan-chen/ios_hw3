@@ -42,7 +42,6 @@ struct ContentView: View {
                         }
                         .frame(height:100)
                     }
-                    .foregroundColor(Color.black)
                     
                     HStack{
                         Image("w0")
@@ -64,8 +63,8 @@ struct ContentView: View {
                             .frame(width: 150)
                             .clipped()
                         NavigationLink(
-                            destination:Right1View()){
-                            Text("南部")
+                            destination:Right3View()){
+                            Text("旅遊懶人包")
                         }
                         
                     }
@@ -77,8 +76,8 @@ struct ContentView: View {
                             .frame(width: 150)
                             .clipped()
                         NavigationLink(
-                            destination:Right1View()){
-                            Text("東部")
+                            destination:Right4View()){
+                            Text("出遊必備")
                         }
                         
                     }
@@ -141,26 +140,46 @@ struct ContentView: View {
                     
                     ScrollView( .horizontal, showsIndicators:false){
                         
-                        HStack( spacing: 5){
-                            ForEach(5..<7){(item) in
-                            Image("n\(item)")
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 150,alignment: .top)
-                                .clipped()
-                            }
-                        }
-                        .frame(height:180)
                         HStack{
-                            ForEach(7..<9){(item) in
-                            Image("n\(item)")
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 150,alignment: .top)
-                                .clipped()
+                            NavigationLink(
+                                destination:Rightn5View()){
+                                Image("n5")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 150,alignment: .top)
+                                    .clipped()
+                                
+                            }
+                            NavigationLink(
+                                destination:Rightn6View()){
+                                Image("n6")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 150,alignment: .top)
+                                    .clipped()
                             }
                         }
-                        .frame(height:140)
+                        .frame(height:150)
+                        HStack{
+                            NavigationLink(
+                                destination:Rightn7View()){
+                                Image("n7")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 150,alignment: .top)
+                                    .clipped()
+                                
+                            }
+                            NavigationLink(
+                                destination:Rightn8View()){
+                                Image("n8")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 150,alignment: .top)
+                                    .clipped()
+                            }
+                        }
+                        .frame(height:150)
                         
                     }
                     .foregroundColor(Color.black)
@@ -174,6 +193,7 @@ struct ContentView: View {
             }
             .tabViewStyle(PageTabViewStyle())
             .navigationBarTitle("網美景點")
+            .foregroundColor(.primary)
         }
     }
 }
@@ -193,7 +213,9 @@ struct Rightn1View: View{
         .rotationEffect(.degrees(rotateDegree))
         .animation(Animation.linear(duration: 2))
         .onAppear {rotateDegree = 360}
+        .padding()
         .background(Color(red: 0.6, green: 0.6, blue: 0.9))
+        .cornerRadius(20)
     }
 }
 struct Rightn1View_Previews: PreviewProvider{
@@ -204,6 +226,7 @@ struct Rightn1View_Previews: PreviewProvider{
     }
 }
 struct Rightn2View: View{
+    @State var moveX: CGFloat = 200
     var body: some View {
         Link(destination: URL(string: "https://www.instagram.com/hanjiji8/")!, label: {
             VStack{
@@ -212,13 +235,17 @@ struct Rightn2View: View{
                     .scaledToFill()
                     .frame(width: 150, height: 150, alignment: .center)
                     .clipped()
-                Text("菜單部分有部隊鍋、韓國炸雞、馬鈴薯排骨湯、海鮮煎餅、辣炒年糕、銅板烤肉、石鍋拌飯、飲品等，選擇品項滿多的價位落在$45~$520之間\n海鮮煎餅的，裡面添加了韭菜、蝦仁、花枝等，香煎而成~帶點微微的厚度口感軟Q，沾上特調醬汁清爽又解膩，外層的餅皮則帶點酥脆口感，讓人忍不住一口接一口")
-                    .transition(.scale)
+                Text("菜單部分有部隊鍋、韓國炸雞、馬鈴薯排骨湯、海鮮煎餅、辣炒年糕、銅板烤肉、石鍋拌飯、飲品等，選擇品項滿多的價位落在$45~$520之間\n海鮮煎餅的，裡面添加了韭菜、蝦仁、花枝等，香煎而成~帶點微微的厚度口感軟Q，沾上特調醬汁清爽又解膩，外層的餅皮則帶點酥脆口感，讓人忍不住一口接一口\n")
+                
             }
-            .animation(.easeInOut(duration: 3))
-            .onAppear()
-            .background(Color(red: 0.6, green: 0.6, blue: 0.9))
-            .cornerRadius(20)
+            .offset(x: moveX)
+            .animation(.easeIn(duration: 3))
+            .onAppear(perform: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {moveX = 0}
+                            })
+            .background(Color(red: 0.6, green: 0.9, blue: 0.6))
+            .padding()
+            .cornerRadius(10)
         })
         .buttonStyle(PlainButtonStyle())
     }
@@ -231,6 +258,7 @@ struct Rightn2View_Previews: PreviewProvider{
     }
 }
 struct Rightn3View: View{
+    @State var movey: CGFloat = 200
     var body: some View {
         VStack{
             Image("n3.1")
@@ -238,12 +266,15 @@ struct Rightn3View: View{
                 .scaledToFill()
                 .frame(width: 150, height: 150, alignment: .center)
                 .clipped()
-            Text("這裡的麵線就只有大腸沒有蚵仔,還有一個特色就是不加香菜而是九層塔,老闆還會先問要不要蒜蓉跟醬油,喜還重口味的都可以先”注文”,小吃攤也可以完全客製化服務喔,很親切的在地人情味小吃店.\n麵線湯頭的口味略偏甜一點,滿滿蒜香正好符合我的喜好,加上滷到入味軟Q的大腸也很對味,至於九層塔不喜歡的也可以不加喔")
-                .transition(.slide)
+            Text("這裡的麵線就只有大腸沒有蚵仔,還有一個特色就是不加香菜而是九層塔,老闆還會先問要不要蒜蓉跟醬油,喜還重口味的都可以先”注文”,小吃攤也可以完全客製化服務喔,很親切的在地人情味小吃店.\n麵線湯頭的口味略偏甜一點,滿滿蒜香正好符合我的喜好,加上滷到入味軟Q的大腸也很對味,至於九層塔不喜歡的也可以不加喔\n")
         }
+        .offset(y: movey)
         .animation(.easeInOut(duration: 3))
+        .onAppear(perform: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {movey = 0}
+                        })
         .padding()
-        .background(Color(red: 0.6, green: 0.6, blue: 0.9))
+        .background(Color(red: 0.4, green: 0.8, blue: 0.9))
         .cornerRadius(20)
         
     }
@@ -256,6 +287,7 @@ struct Rightn3View_Previews: PreviewProvider{
     }
 }
 struct Rightn4View: View{
+    @State private var rotateDegree: Double = 180
     var body: some View {
         VStack{
             Image("n4.1")
@@ -263,13 +295,14 @@ struct Rightn4View: View{
                 .scaledToFill()
                 .frame(width: 150, height: 150, alignment: .center)
                 .clipped()
-            Text("物價居高不下、薪水不漲價是不少民眾的痛處，尋找高CP值的商品已經成為民眾的小確幸。有網友近期發文分享自己買的鮭魚炒飯，只見便當內的鮭魚肉大塊、飯的份量很足，整個便當料都快滿出來，原PO表示他在萬華花了80元買的，下次要帶臉盆去買。 ")
-                .transition(.identity)
+            Text("物價居高不下、薪水不漲價是不少民眾的痛處，尋找高CP值的商品已經成為民眾的小確幸。有網友近期發文分享自己買的鮭魚炒飯，只見便當內的鮭魚肉大塊、飯的份量很足，整個便當料都快滿出來，原PO表示他在萬華花了80元買的，下次要帶臉盆去買。\n ")
         }
-        .animation(.easeInOut(duration: 2))
+        .rotationEffect(.degrees(rotateDegree))
+        .animation(Animation.linear(duration: 2))
+        .onAppear {rotateDegree = 360}
         .padding()
-        .background(Color(red: 0.6, green: 0.6, blue: 0.9))
-        .cornerRadius(20)
+        .background(Color(red: 0.9, green: 0.8, blue: 0.5))
+        .cornerRadius(10)
         
     }
 }
@@ -277,6 +310,118 @@ struct Rightn4View_Previews: PreviewProvider{
     static var previews: some View{
         NavigationView{
             Rightn4View()
+        }
+    }
+}
+struct Rightn5View: View{
+    @State private var rotateDegree: Double = 180
+    var body: some View {
+        VStack{
+            Image("n5.1")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 150, height: 150, alignment: .center)
+                .clipped()
+            Text("Xpark這是由日本橫濱八景島打造的全台首座國際級水族館，4500坪的水族館分為13個展區，會聽得到宮崎駿動畫御用配樂師久石讓（ひさいし じょう）的7首曲子，環繞6個展區。\nXpark是全台最大水槽高約四樓，銀鱗鯧群聚瞬間拗像一幅流動的水中沙")
+        }
+        .rotationEffect(.degrees(rotateDegree))
+        .animation(Animation.linear(duration: 2))
+        .onAppear {rotateDegree = 360}
+        .padding()
+        .background(Color(red: 0.5, green: 0.8, blue: 0.9))
+        .cornerRadius(10)
+        
+    }
+}
+struct Rightn5View_Previews: PreviewProvider{
+    static var previews: some View{
+        NavigationView{
+            Rightn5View()
+        }
+    }
+}
+struct Rightn6View: View{
+    @State var moveX: CGFloat = 200
+    var body: some View {
+        VStack{
+            Image("n6.1")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 150, height: 150, alignment: .center)
+                .clipped()
+            Text("金山驛境\n全台唯一以西部牛仔主題的露營區－金山驛站，白天騎著可愛的馬兒漫步在陽光底下，晚上入住免裝備的露營帳，和姊妹淘在星空和螢火蟲的陪伴下入睡，還可以參加射擊、越野車、射箭等活動，來到這裡，完成你幻想已久的牛仔夢！")
+        }
+        .offset(x: moveX)
+        .animation(.easeIn(duration: 3))
+        .onAppear(perform: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {moveX = 0}
+                        })
+        .padding()
+        .background(Color(red: 0.7, green: 0.7, blue: 0.9))
+        .cornerRadius(20)
+        
+    }
+}
+struct Rightn6View_Previews: PreviewProvider{
+    static var previews: some View{
+        NavigationView{
+            Rightn6View()
+        }
+    }
+}
+struct Rightn7View: View{
+    @State var movey: CGFloat = 200
+    var body: some View {
+        VStack{
+            Image("n7.1")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 150, height: 150, alignment: .center)
+                .clipped()
+            Text("九月，是韭菜花盛開的季節,因為花期只有短短的一個月,整片純白色花田又似雪花飄散,因此有了「九月雪」的稱號\n只要導航設定桃園大溪區大鶯路407號，就可以看到這棟超可愛的黃色小屋,對面就是一整片夢幻韭菜花海～")
+        }
+        .offset(y: movey)
+        .animation(.easeInOut(duration: 3))
+        .onAppear(perform: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {movey = 0}
+                        })
+        .padding()
+        .background(Color(red: 0.4, green: 0.8, blue: 0.9))
+        .cornerRadius(20)
+        
+    }
+}
+struct Rightn7View_Previews: PreviewProvider{
+    static var previews: some View{
+        NavigationView{
+            Rightn7View()
+        }
+    }
+}
+struct Rightn8View: View{
+    @State private var rotateDegree: Double = 180
+    var body: some View {
+        VStack{
+            Image("n8.1")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 150, height: 150, alignment: .center)
+                .clipped()
+            Text("青立方是新店銀河洞附近的人氣景觀餐廳，非常有特色的紅磚拱門及觀景台被大家稱為「紅磚版天空之城」， 還有被植物環繞的室內室外唯美座位，花園也整理得相當整齊美觀，非常好拍，不過生意真的很好耶，平假日都好多人，建議行前務必事先訂位，如果想好好拍照，平日來用餐比較好。 ")
+        }
+        .rotationEffect(.degrees(rotateDegree))
+        .animation(Animation.linear(duration: 2))
+        .onAppear {rotateDegree = 360}
+        .padding()
+        .background(Color(red: 0.6, green: 0.8, blue: 0.6))
+        .cornerRadius(10)
+        
+    }
+}
+struct Rightn8View_Previews: PreviewProvider{
+    static var previews: some View{
+        NavigationView{
+            Rightn8View()
         }
     }
 }
@@ -413,10 +558,78 @@ extension AnyTransition{
         return .asymmetric(insertion: insertion, removal: removal)
     }
 }
-struct RightView_Previews: PreviewProvider{
+struct Right2View_Previews: PreviewProvider{
     static var previews: some View{
         NavigationView{
             Right2View()
+        }
+    }
+}
+struct Right3View: View{
+    @State private var rotateDegree: Double = 0
+    var body: some View {
+        ZStack(alignment: .top){
+            //Text("1")
+            Image("s1")
+                .padding(.bottom,30)
+            Link(destination: URL(string: "https://nanai.tw/category/taiwan-attractions-lazy-package-trip-planning/")!, label: {
+                Text("點進去")
+                .offset(x: 100, y: 0)
+            })
+            .buttonStyle(PlainButtonStyle())
+        }.background(LinearGradient(gradient: Gradient(colors: [Color.yellow, Color.orange]), startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 1, y: 1)).frame(width: 500, height: 500))
+        
+    }
+}
+struct Right3View_Previews: PreviewProvider{
+    static var previews: some View{
+        NavigationView{
+            Right3View()
+        }
+    }
+}
+struct Right4View: View{
+    var body: some View {
+        ZStack(alignment: .top){
+            Image("e2")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 100, height: 100)
+                .position(x: 150, y: 310)
+                .rotationEffect(.degrees(-30))
+            Image("e1")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 100, height: 100)
+                .position(x: 300, y: 310)
+                .rotationEffect(.degrees(30))
+            
+            Image("e4")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 300, height: 300)
+                .position(x: 150, y: 600)
+                .rotationEffect(.degrees(-10))
+            Image("e3")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 100, height: 100)
+                .position(x: 250, y: 110)
+                .rotationEffect(.degrees(10))
+            Image("e5")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 150, height: 100)
+                .position(x: 200, y: 80)
+                .rotationEffect(.degrees(-30))
+        }
+        
+    }
+}
+struct Right4View_Previews: PreviewProvider{
+    static var previews: some View{
+        NavigationView{
+            Right4View()
         }
     }
 }
